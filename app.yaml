@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-app
+  namespace: default
+spec:
+  destination:
+    server: 'https://kubernetes.default.svc' # URL of your Kubernetes API server
+    namespace: my-namespace # Target namespace in your cluster
+  project: default # Project to which the application belongs
+  source:
+    repoURL: https://github.com/ricardosilva86/fluffy-octo-journey
+    path: manifests/app.yaml
+    targetRevision: HEAD # Git revision (branch, tag, commit SHA) to use
+  syncPolicy:
+    automated:
+      prune: true # Automatically remove resources that are no longer defined in Git
